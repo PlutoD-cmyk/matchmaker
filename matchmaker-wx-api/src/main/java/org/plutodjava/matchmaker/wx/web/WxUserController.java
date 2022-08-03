@@ -98,7 +98,12 @@ public class WxUserController {
             return ResponseUtil.unlogin();
         }
         String place = JacksonUtil.parseString(body, "place");
-        IntentionJsonVo intentionJsonVo = JacksonUtil.parseObject(body, "intention", IntentionJsonVo.class);
+        IntentionJsonVo intentionJsonVo = null;
+        try {
+            intentionJsonVo = JacksonUtil.parseObject(body, "intention", IntentionJsonVo.class);
+        } catch (Exception e) {
+            logger.error("intention is null");
+        }
         String education = JacksonUtil.parseString(body, "education");
         String industry = JacksonUtil.parseString(body, "industry");
         Integer income = JacksonUtil.parseInteger(body, "income");
