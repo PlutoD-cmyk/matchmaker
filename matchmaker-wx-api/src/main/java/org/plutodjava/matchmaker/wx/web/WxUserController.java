@@ -17,7 +17,7 @@ import org.plutodjava.matchmaker.core.vo.CommonConstant;
 import org.plutodjava.matchmaker.wx.annotation.LoginUser;
 import org.plutodjava.matchmaker.wx.dto.OppositeSexUserVo;
 import org.plutodjava.matchmaker.wx.utils.SplitUtil;
-import org.plutodjava.matchmaker.wx.utils.XuRemarkUtil;
+import org.plutodjava.matchmaker.core.utils.XuRemarkUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
@@ -35,7 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.plutodjava.matchmaker.wx.utils.XuRemarkUtil.getContentType;
+import static org.plutodjava.matchmaker.core.utils.XuRemarkUtil.getContentType;
 
 /**
  * 相亲报名
@@ -186,6 +186,12 @@ public class WxUserController {
             return ResponseUtil.updatedDataFailed();
         }
         return ResponseUtil.ok(user.getId());
+    }
+
+    @PostMapping("/queryTypicalPicList")
+    public Object queryOppositeSexUser() {
+        List<String> data = flippedMobileGroupManager.findAllTypicalList();
+        return ResponseUtil.ok(data);
     }
 
     @PostMapping("/queryOppositeSexUser")

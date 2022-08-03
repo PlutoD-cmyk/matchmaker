@@ -5,12 +5,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.plutodjava.matchmaker.db.dao.TbFlippedMobileGroupMapper;
 import org.plutodjava.matchmaker.db.domain.*;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -83,5 +86,16 @@ public class FlippedMobileGroupManager {
     public int updateById(TbFlippedMobileGroup tbFlippedMobileGroup) {
         tbFlippedMobileGroup.setUpdateTime(LocalDateTime.now());
         return flippedMobileGroupMapper.updateByPrimaryKeySelective(tbFlippedMobileGroup);
+    }
+
+    public List<String> findAllTypicalList() {
+        TbFlippedMobileGroupExample example = new TbFlippedMobileGroupExample();
+        example.or().andTypicalUrlIsNotNull().andDeletedEqualTo(false).andHandEqualTo(true);
+        List<TbFlippedMobileGroup> flippedMobileGroupList = flippedMobileGroupMapper.selectByExample(example);
+        List<String> collect = new ArrayList<>();
+        if (!CollectionUtils.isEmpty(flippedMobileGroupList)) {
+            collect = flippedMobileGroupList.stream().map(TbFlippedMobileGroup::getTypicalUrl).collect(Collectors.toList());
+        }
+        return collect;
     }
 }
