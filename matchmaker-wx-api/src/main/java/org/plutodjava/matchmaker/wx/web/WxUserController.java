@@ -188,7 +188,7 @@ public class WxUserController {
         return ResponseUtil.ok(user.getId());
     }
 
-    @PostMapping("/queryTypicalPicList")
+    @GetMapping("/queryTypicalPicList")
     public Object queryOppositeSexUser() {
         List<String> data = flippedMobileGroupManager.findAllTypicalList();
         return ResponseUtil.ok(data);
