@@ -95,7 +95,7 @@ public class WxUserAuthController {
         String gender = JacksonUtil.parseString(body, "gender");
         //Integer age = JacksonUtil.parseInteger(body, "age");
         String certificate = JacksonUtil.parseString(body, "certificate");
-        Integer age = idCardUtil.getAge(certificate);
+        Integer age = IdCardNumberMethod.getAgeForIdcard(certificate);
         String marriage = JacksonUtil.parseString(body, "marriage");
         // 如果是小程序注册，则必须非空
         // 其他情况，可以为空
