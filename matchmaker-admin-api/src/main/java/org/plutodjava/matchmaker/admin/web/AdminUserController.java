@@ -149,7 +149,7 @@ public class AdminUserController {
             String encodedPassword = encoder.encode(rawPassword);
             tbUser.setPassword(encodedPassword);
             tbUser.setStatus(0);
-            notifyService.notifySmsTemplate(phoneNumber, NotifyType.ALLOW, new String[]{phoneNumber,rawPassword});
+            notifyService.notifyAllowSmsTemplate(phoneNumber, NotifyType.ALLOW, new String[]{phoneNumber,rawPassword});
         } else {
             if (tbUser.getStatus() == 2) {
                 return ResponseUtil.fail(-1,"请勿重复操作");

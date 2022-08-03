@@ -53,6 +53,25 @@ public class NotifyService {
     }
 
     /**
+     * 短信模版消息通知
+     *
+     * @param phoneNumber 接收通知的电话号码
+     * @param notifyType  通知类别，通过该枚举值在配置文件中获取相应的模版ID
+     * @param params      通知模版内容里的参数，类似"您的验证码为{1}"中{1}的值
+     */
+    @Async
+    public void notifyAllowSmsTemplate(String phoneNumber, NotifyType notifyType, String[] params) {
+        if (smsSender == null) {
+            return;
+        }
+        String templateIdStr = getTemplateId(notifyType, smsTemplate);
+        if (templateIdStr == null) {
+            return;
+        }
+        smsSender.sendAllowUserWithTemplate(phoneNumber, templateIdStr, params);
+    }
+
+    /**
      * 以同步的方式发送短信模版消息通知
      *
      * @param phoneNumber 接收通知的电话号码
