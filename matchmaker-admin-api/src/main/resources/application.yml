@@ -1,0 +1,19 @@
+spring:
+  profiles:
+    active: db, core, admin
+  messages:
+    encoding: UTF-8
+
+server:
+  port: 8631
+
+logging:
+  level:
+    root:  ERROR
+    org.springframework:  ERROR
+    org.mybatis:  ERROR
+    org.plutodjava.matchmaker.admin:  DEBUG
+    org.plutodjava.matchmaker:  ERROR
+
+swagger:
+  production: false

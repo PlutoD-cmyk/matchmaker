@@ -1,0 +1,63 @@
+spring:
+  #easypoi启用覆盖
+  main:
+    allow-bean-definition-overriding: true
+  redis:
+    #数据库索引
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password:
+    jedis:
+      pool:
+        #最大连接数
+        max-active: 8
+        #最大阻塞等待时间(负数表示没限制)
+        max-wait: -1
+        #最大空闲
+        max-idle: 8
+        #最小空闲
+        min-idle: 0
+        #连接超时时间
+    timeout: 10000
+matchmaker:
+  # 对象存储配置
+  storage:
+    # 当前工作的对象存储模式，分别是local、aliyun、tencent、qiniu
+    active: aliyun
+    # 阿里云对象存储配置信息
+    aliyun:
+      endpoint: oss-cn-beijing.aliyuncs.com
+      accessKeyId: LTAI5tAmvhndEHeaNqMCH7Br
+      accessKeySecret: CpO33GkPBeHJ1SsFQrUjLokryf8Yg9
+      bucketName: wanzhoumatchmaker
+  #通知相关配置
+  notify:
+    sms:
+      sign: 万州政务服务
+      template:
+      - name: captcha
+        templateId: SMS_247700193
+      - name: reject
+        templateId: SMS_247700469
+      - name: allow
+        templateId: SMS_247495511
+      aliyun:
+        regionId: oss-cn-beijing.aliyuncs.com
+        accessKeyId: LTAI5tAmvhndEHeaNqMCH7Br
+        accessKeySecret: CpO33GkPBeHJ1SsFQrUjLokryf8Yg9
+
+  # 开发者应该设置成自己的wx相关信息
+wx:
+  mp:
+    useRedis: true
+    redisConfig:
+      host: 127.0.0.1
+      port: 6379
+      password:
+      timeout: 10000
+    configs:
+      - appId: 1111 # 第一个公众号的appid
+        secret: 1111 # 公众号的appsecret
+        token: 111 # 接口配置里的Token值
+        aesKey: 111 # 接口配置里的EncodingAESKey值

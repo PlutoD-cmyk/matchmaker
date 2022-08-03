@@ -1,0 +1,19 @@
+spring:
+  profiles:
+    active: db, core, wx
+  messages:
+    encoding: UTF-8
+  servlet:
+    multipart:
+      enabled: true
+
+server:
+  port: 8631
+
+logging:
+  level:
+    root:  ERROR
+    org.springframework:  ERROR
+    org.mybatis:  ERROR
+    org.plutodjava.matchmaker.wx:  DEBUG
+    org.plutodjava.matchmaker:  ERROR
