@@ -110,6 +110,7 @@ public class WxUserController {
         Integer height = JacksonUtil.parseInteger(body, "height");
         Integer weight = JacksonUtil.parseInteger(body, "weight");
         String household = JacksonUtil.parseString(body, "household");
+        String marriage = JacksonUtil.parseString(body, "marriage");
 
         TbUser user = userService.findById(Integer.parseInt(userId));
         if(!StringUtils.isEmpty(place)){
@@ -117,6 +118,9 @@ public class WxUserController {
         }
         if(!StringUtils.isEmpty(education)){
             user.setEducation(education);
+        }
+        if(!StringUtils.isEmpty(marriage)){
+            user.setMarriage(marriage);
         }
         if(!StringUtils.isEmpty(industry)){
             user.setIndustry(industry);
