@@ -61,7 +61,7 @@ public class WxUserManager {
         if (!StringUtils.isEmpty(mobile)) {
             criteria.andMobileEqualTo(mobile);
         }
-
+        criteria.andDeletedEqualTo(false);
         if (!StringUtils.isEmpty(sort) && !StringUtils.isEmpty(order)) {
             example.setOrderByClause(sort + " " + order);
         }
