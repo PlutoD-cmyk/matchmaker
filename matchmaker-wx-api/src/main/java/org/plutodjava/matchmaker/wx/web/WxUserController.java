@@ -318,12 +318,12 @@ public class WxUserController {
                 page, limit, sort, order);
         // 校验是否在报名表中
         if (!CollectionUtils.isEmpty(userList)) {
-            List<String> mobileList = userList.stream().map(TbUser::getMobile).collect(Collectors.toList());
-            List<TbFlippedMobileGroup> flippedMobileGroupList = flippedMobileGroupManager.queryApplyByFlipMobile(mobileList);
-            List<TbFlippedMobileGroup> byFlippedMobileGroupList = flippedMobileGroupManager.queryApplyByByFlipMobile(mobileList);
-            List<TbFlippedMobileGroup> handByFlipMobile = flippedMobileGroupManager.queryHandByFlipMobile(mobileList);
-            List<TbFlippedMobileGroup> handByByFlipMobile = flippedMobileGroupManager.queryHandByByFlipMobile(mobileList);
             users = Lists.transform(userList, (entity) -> {
+                List<TbFlippedMobileGroup> flippedMobileGroupList = flippedMobileGroupManager.queryApplyByFlipMobile(entity.getMobile());
+                List<TbFlippedMobileGroup> byFlippedMobileGroupList = flippedMobileGroupManager.queryApplyByByFlipMobile(entity.getMobile());
+                List<TbFlippedMobileGroup> handByFlipMobile = flippedMobileGroupManager.queryHandByFlipMobile(entity.getMobile());
+                List<TbFlippedMobileGroup> handByByFlipMobile = flippedMobileGroupManager.queryHandByByFlipMobile(entity.getMobile());
+
                 OppositeSexUserVo vo = new OppositeSexUserVo();
                 BeanUtils.copyProperties(entity, vo);
                 if (!CollectionUtils.isEmpty(flippedMobileGroupList)) {
