@@ -128,7 +128,7 @@ public class WxUserController {
             user.setIncome(income);
         }
         if (weight != null) {
-            user.setWeight(income);
+            user.setWeight(weight);
         }
         if (height != null) {
             user.setHeight(height);
