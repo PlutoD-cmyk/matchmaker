@@ -378,7 +378,7 @@ public class WxUserController {
 
         String flippedMobile = user.getMobile();
         List<TbFlippedMobileGroup> flippedMobileGroupList = flippedMobileGroupManager.checkOnly(flippedMobile, byFlippedMobile);
-        if (CollectionUtils.isEmpty(flippedMobileGroupList)) {
+        if (!CollectionUtils.isEmpty(flippedMobileGroupList)) {
             return ResponseUtil.fail(-1, "已建立意向，请等平台联系");
         }
         TbFlippedMobileGroup flippedMobileGroup = new TbFlippedMobileGroup();
