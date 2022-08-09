@@ -3,7 +3,12 @@ pagehelper:
   reasonable: true
   supportMethodsArguments:  true
   params: count=countSql
-
+logging:
+  level:
+    com.alibaba.druid.pool.DruidAbstractDataSource: error
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 spring:
   datasource:
     druid:

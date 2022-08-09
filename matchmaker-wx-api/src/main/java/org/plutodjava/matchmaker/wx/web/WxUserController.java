@@ -320,9 +320,9 @@ public class WxUserController {
         if (!CollectionUtils.isEmpty(userList)) {
             List<String> mobileList = userList.stream().map(TbUser::getMobile).collect(Collectors.toList());
             List<TbFlippedMobileGroup> flippedMobileGroupList = flippedMobileGroupManager.queryApplyByFlipMobile(mobileList);
-            List<TbFlippedMobileGroup> byFlippedMobileGroupList = flippedMobileGroupManager.queryApplyByFlipMobile(mobileList);
+            List<TbFlippedMobileGroup> byFlippedMobileGroupList = flippedMobileGroupManager.queryApplyByByFlipMobile(mobileList);
             List<TbFlippedMobileGroup> handByFlipMobile = flippedMobileGroupManager.queryHandByFlipMobile(mobileList);
-            List<TbFlippedMobileGroup> handByByFlipMobile = flippedMobileGroupManager.queryHandByFlipMobile(mobileList);
+            List<TbFlippedMobileGroup> handByByFlipMobile = flippedMobileGroupManager.queryHandByByFlipMobile(mobileList);
             users = Lists.transform(userList, (entity) -> {
                 OppositeSexUserVo vo = new OppositeSexUserVo();
                 BeanUtils.copyProperties(entity, vo);

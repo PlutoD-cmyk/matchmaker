@@ -40,9 +40,20 @@ public class FlippedMobileGroupManager {
         return flippedMobileGroupMapper.selectByExample(example);
     }
 
+    public List<TbFlippedMobileGroup> queryApplyByByFlipMobile(List<String> mobileList) {
+        TbFlippedMobileGroupExample example = new TbFlippedMobileGroupExample();
+        example.or().andByFlippedMobileIn(mobileList).andDeletedEqualTo(false).andApplyEqualTo(true);
+        return flippedMobileGroupMapper.selectByExample(example);
+    }
+
     public List<TbFlippedMobileGroup> queryHandByFlipMobile(List<String> mobileList) {
         TbFlippedMobileGroupExample example = new TbFlippedMobileGroupExample();
-        example.or().andFlippedMobileIn(mobileList).andDeletedEqualTo(false).andApplyEqualTo(true);
+        example.or().andFlippedMobileIn(mobileList).andDeletedEqualTo(false).andHandEqualTo(true);
+        return flippedMobileGroupMapper.selectByExample(example);
+    }
+    public List<TbFlippedMobileGroup> queryHandByByFlipMobile(List<String> mobileList) {
+        TbFlippedMobileGroupExample example = new TbFlippedMobileGroupExample();
+        example.or().andByFlippedMobileIn(mobileList).andDeletedEqualTo(false).andHandEqualTo(true);
         return flippedMobileGroupMapper.selectByExample(example);
     }
 
