@@ -373,7 +373,10 @@ public class WxUserController {
         }
 
         String byFlippedMobile = JacksonUtil.parseString(body, "byFlippedMobile");
-
+        boolean apply = flippedMobileGroupManager.queryApply(byFlippedMobile);
+        if (apply) {
+            return ResponseUtil.fail(-1, "对方已参与线下报名，无法建立意向");
+        }
         TbUser user = userService.findById(Integer.valueOf(userId));
 
         String flippedMobile = user.getMobile();

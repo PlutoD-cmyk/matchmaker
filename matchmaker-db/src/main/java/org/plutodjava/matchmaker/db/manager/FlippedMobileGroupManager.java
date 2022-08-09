@@ -40,6 +40,16 @@ public class FlippedMobileGroupManager {
         return flippedMobileGroupMapper.selectByExample(example);
     }
 
+    public boolean queryApply(String mobile) {
+        TbFlippedMobileGroupExample example1 = new TbFlippedMobileGroupExample();
+        example1.or().andByFlippedMobileEqualTo(mobile).andDeletedEqualTo(false).andApplyEqualTo(true);
+
+        TbFlippedMobileGroupExample example2 = new TbFlippedMobileGroupExample();
+        example2.or().andByFlippedMobileEqualTo(mobile).andDeletedEqualTo(false).andApplyEqualTo(true);
+        return !CollectionUtils.isEmpty(flippedMobileGroupMapper.selectByExample(example1))
+                ||!CollectionUtils.isEmpty(flippedMobileGroupMapper.selectByExample(example2));
+    }
+
     public List<TbFlippedMobileGroup> queryApplyByByFlipMobile(List<String> mobileList) {
         TbFlippedMobileGroupExample example = new TbFlippedMobileGroupExample();
         example.or().andByFlippedMobileIn(mobileList).andDeletedEqualTo(false).andApplyEqualTo(true);
