@@ -34,9 +34,9 @@ public class FlippedMobileGroupManager {
         return flippedMobileGroupMapper.selectByExample(example);
     }
 
-    public List<TbFlippedMobileGroup> queryApplyByFlipMobile(List<String> mobileList) {
+    public List<TbFlippedMobileGroup> queryApplyByFlipMobile(String mobile) {
         TbFlippedMobileGroupExample example = new TbFlippedMobileGroupExample();
-        example.or().andFlippedMobileIn(mobileList).andDeletedEqualTo(false).andApplyEqualTo(true);
+        example.or().andFlippedMobileEqualTo(mobile).andDeletedEqualTo(false).andApplyEqualTo(true);
         return flippedMobileGroupMapper.selectByExample(example);
     }
 
@@ -50,20 +50,20 @@ public class FlippedMobileGroupManager {
                 ||!CollectionUtils.isEmpty(flippedMobileGroupMapper.selectByExample(example2));
     }
 
-    public List<TbFlippedMobileGroup> queryApplyByByFlipMobile(List<String> mobileList) {
+    public List<TbFlippedMobileGroup> queryApplyByByFlipMobile(String mobile) {
         TbFlippedMobileGroupExample example = new TbFlippedMobileGroupExample();
-        example.or().andByFlippedMobileIn(mobileList).andDeletedEqualTo(false).andApplyEqualTo(true);
+        example.or().andByFlippedMobileEqualTo(mobile).andDeletedEqualTo(false).andApplyEqualTo(true);
         return flippedMobileGroupMapper.selectByExample(example);
     }
 
-    public List<TbFlippedMobileGroup> queryHandByFlipMobile(List<String> mobileList) {
+    public List<TbFlippedMobileGroup> queryHandByFlipMobile(String mobile) {
         TbFlippedMobileGroupExample example = new TbFlippedMobileGroupExample();
-        example.or().andFlippedMobileIn(mobileList).andDeletedEqualTo(false).andHandEqualTo(true);
+        example.or().andFlippedMobileEqualTo(mobile).andDeletedEqualTo(false).andHandEqualTo(true);
         return flippedMobileGroupMapper.selectByExample(example);
     }
-    public List<TbFlippedMobileGroup> queryHandByByFlipMobile(List<String> mobileList) {
+    public List<TbFlippedMobileGroup> queryHandByByFlipMobile(String mobile) {
         TbFlippedMobileGroupExample example = new TbFlippedMobileGroupExample();
-        example.or().andByFlippedMobileIn(mobileList).andDeletedEqualTo(false).andHandEqualTo(true);
+        example.or().andByFlippedMobileEqualTo(mobile).andDeletedEqualTo(false).andHandEqualTo(true);
         return flippedMobileGroupMapper.selectByExample(example);
     }
 
