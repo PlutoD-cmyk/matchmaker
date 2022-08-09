@@ -2,9 +2,13 @@ package org.plutodjava.matchmaker.db.manager;
 
 import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
+import org.plutodjava.matchmaker.db.dao.TbFlippedMobileGroupMapper;
+import org.plutodjava.matchmaker.db.dao.TbUserIntentionMapper;
 import org.plutodjava.matchmaker.db.dao.TbUserMapper;
+import org.plutodjava.matchmaker.db.domain.TbFlippedMobileGroupExample;
 import org.plutodjava.matchmaker.db.domain.TbUser;
 import org.plutodjava.matchmaker.db.domain.TbUserExample;
+import org.plutodjava.matchmaker.db.domain.TbUserIntentionExample;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -19,6 +23,12 @@ import java.util.List;
 public class WxUserManager {
     @Resource
     private TbUserMapper userMapper;
+
+    @Resource
+    private TbFlippedMobileGroupMapper flippedMobileGroupMapper;
+
+    @Resource
+    private TbUserIntentionMapper userIntentionMapper;
 
     public TbUser findById(Integer userId) {
         return userMapper.selectByPrimaryKey(userId);
@@ -75,6 +85,22 @@ public class WxUserManager {
     public int updateById(TbUser user) {
         user.setUpdateTime(LocalDateTime.now());
         return userMapper.updateByPrimaryKeySelective(user);
+    }
+
+    public int deleteUser(TbUser user) {
+        user.setDeleted(true);
+        user.setUpdateTime(LocalDateTime.now());
+        userMapper.updateByPrimaryKeySelective(user);
+        TbUserIntentionExample userIntentionExample = new TbUserIntentionExample();
+        userIntentionExample.or().andUserIdEqualTo(user.getId());
+        userIntentionMapper.deleteByExample(userIntentionExample);
+        TbFlippedMobileGroupExample flippedMobileGroupExample = new TbFlippedMobileGroupExample();
+        flippedMobileGroupExample.or().andFlippedMobileEqualTo(user.getMobile()).andDeletedEqualTo(false);
+        flippedMobileGroupMapper.deleteByExample(flippedMobileGroupExample);
+        TbFlippedMobileGroupExample byFlipExample = new TbFlippedMobileGroupExample();
+        byFlipExample.or().andByFlippedMobileEqualTo(user.getMobile()).andDeletedEqualTo(false);
+        flippedMobileGroupMapper.deleteByExample(byFlipExample);
+        return user.getId();
     }
 
     public List<TbUser> queryOppositeSexUser(List<String> industryList, Integer ageStart,

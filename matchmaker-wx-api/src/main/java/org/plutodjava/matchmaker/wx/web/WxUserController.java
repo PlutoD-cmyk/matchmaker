@@ -176,19 +176,22 @@ public class WxUserController {
      * @param userId
      * @return
      */
-    @PostMapping("deleteUser")
-    public Object deleteUser(@LoginUser String userId) {
+    @PostMapping("quit")
+    public Object quit(@LoginUser String userId,@RequestBody String body) {
         if(userId == null){
             return ResponseUtil.unlogin();
         }
+        String quitReason = JacksonUtil.parseString(body, "quitReason");
         TbUser user = userService.findById(Integer.valueOf(userId));
         if (user == null) {
             return ResponseUtil.fail(-1,"用户不存在");
         }
-        user.setDeleted(true);
-        if (userService.updateById(user) == 0) {
+        user.setQuitReason(quitReason);
+
+        if (userService.deleteUser(user) == 0) {
             return ResponseUtil.updatedDataFailed();
         }
+
         return ResponseUtil.ok(user.getId());
     }
 
