@@ -8,4 +8,6 @@ public class OppositeSexUserVo extends TbUser {
     private Boolean ifApply;
 
     private Boolean isHand;
+
+    private String intention;
 }

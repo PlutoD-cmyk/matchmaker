@@ -340,6 +340,11 @@ public class WxUserController {
                 } else {
                     vo.setIsHand(false);
                 }
+                List<TbUserIntention> intentions = userIntentionManager.queryByUserId(entity.getId());
+                if (CollectionUtils.isEmpty(intentions)) {
+                } else {
+                    vo.setIntention(JsonUtils.toJson(intentions.get(0)));
+                }
                 return vo;
             });
         }
