@@ -54,8 +54,10 @@ public class MeetIntentionManageController {
         TbFlippedMobileGroup tbFlippedMobileGroup = flippedMobileGroupManager.findById(id);
         tbFlippedMobileGroup.setApply(apply);
         tbFlippedMobileGroup.setHand(hand);
-        if (!hand) {
-            tbFlippedMobileGroup.setTypicalUrl(null);
+        if(hand != null) {
+            if (!hand) {
+                tbFlippedMobileGroup.setTypicalUrl(null);
+            }
         }
         if (flippedMobileGroupManager.updateById(tbFlippedMobileGroup) == 0) {
             return ResponseUtil.updatedDataFailed();
